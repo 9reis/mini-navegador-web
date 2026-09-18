@@ -16,7 +16,7 @@ public class MiniNavegador extends Application {
 		WebEngine motor = navegador.getEngine();
 
 		// Carrega uma pag. da web ao pressionar enter 
-		campoUrl.setOnAction(evento -> motor.load( campoUrl.getText()));
+		campoUrl.setOnAction(evento -> motor.load(formataUrl(campoUrl.getText())));
 
 		VBox vbox = new VBox(); 
 		vbox.getChildren().addAll(campoUrl, navegador);
@@ -29,5 +29,13 @@ public class MiniNavegador extends Application {
 
 	public static void main(String[] args){
 		launch(args);
+	}
+
+	// Metodo para inserir HTTP se o usuário não digitar 
+	public String formataUrl(String url){
+		if(!url.startsWith("http://") && !url.startsWith("https://")){
+			url = "http://" + url;
+		}
+		return url;
 	}
 }
